@@ -1,17 +1,26 @@
 {
+  "homepage": "https://leslie19853.github.io/Gguge-review-comment-generator/",
   "name": "review-comment-provider",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "googleapis": "^118.0.0",
     "handsontable": "^12.3.3",
-    "mysql": "^2.18.1"
-  }
+    "mysql": "^2.18.1",
+    "webpack": "^5.84.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  },
+  "description": ""
 }

@@ -5,44 +5,190 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+      body {
+        background-color: rgb(214, 230, 245);
+      }
       #myInput{
           word-wrap: break-word;
           word-break: break-all;
           white-space: pre-wrap;
       }
-      .A{
+      .whole{
         display: flex;
+        justify-content: space-evenly;
       }
-      #finished{
+      .tableforcss{
+        font-size: 15px;
+        font-family: "Gowun Dodum", sans-serif;
+      }
+      .functions{
+        display: flex;
+        top: 20px;
         margin-left: 10px;
+        position: sticky;
+        
       }
+      .group2{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+      }
+      h1{
+        font-family:'Courier New', Courier, monospace;
+  
+        background-color: #254a8e;
+        color: #ffffff;
+      }
+      #emoji{
+        display: flex;
+        justify-content: space-between;
+      }
+      .functions a{
+        font-family:'Courier New', Courier, monospace;
+        background-color: #26adda;
+        color: #ffffff;
+        font-size: 1em;
+        font-size: 15px;
+        line-height: 1em;
+        margin: 15px 10px;
+        outline: none;
+        padding: 15px 10px 10px;
+        
+      }
+      .functions button{
+        background-color: #254a8e;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family:'Courier New', Courier, monospace;
+        font-size: 1em;
+        font-size: 15px;
+        line-height: 1em;
+        margin: 15px 10px;
+        outline: none;
+        padding: 12px 10px 10px;
+        position: relative;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .functions button:before,
+      .functions button:after {
+        border-color: transparent;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+        border-style: solid;
+        border-width: 0;
+        content: "";
+        height: 24px;
+        position: absolute;
+        width: 24px;
+      }
+      .functions button:before {
+        border-color: #26adda;
+        border-right-width: 2px;
+        border-top-width: 2px;
+        right: -5px;
+        top: -5px;
+      }
+      .functions button:after {
+        border-bottom-width: 2px;
+        border-color: #26adda;
+        border-left-width: 2px;
+        bottom: -5px;
+        left: -5px;
+      }
+      .functions button:hover,
+      .functions button.hover {
+        background-color: #26adda;
+      }
+      .functions button:hover:before,
+      .functions button:before,
+      .functions button:hover:after,
+      .functions button.hover:after {
+        height: 100%;
+        width: 100%;
+      }
+      textarea{
+        font-size: 15px;
+        border: 0;
+        border-radius: 15px;
+        outline: none;
+        padding-left: 10px;
+        background-color: rgb(233, 233, 233);
+        color: #254a8e;
+        font-family: "Gowun Dodum", sans-serif;
+      }
+      #table input{
+        width:90%;
+        border: 2px;
+        padding: 0px;
+        margin: 1px;
+      }
+      .functions input{
+      width: 500px;
+      height: 32px;
+      font-size: 15px;
+      border: 0;
+      border-radius: 15px;
+      outline: none;
+      padding-left: 10px;
+      background-color: rgb(233, 233, 233);
+      font-family: "Gowun Dodum", sans-serif;
+    }
+    
 
     </style>
-
+  
     <title>Gguge Review Comment Generator</title>
 </head>
 <body>
-  <div class="A">
+
+  <h1>Gguge Review Comment Generator</h1>
+  <div class="whole">
 
     <div id="table">
       <div id="comments"></div>
     </div>
-  
-    <div id="finished">
-      <textarea placeholder="finish를 누르면 최종답변이 자동 복사됩니다. " id="myInput" cols="50" rows="25"></textarea>
-      
+    
+    <div class="functions">
       <div>
-        <button onclick="clear_all()">clear</button>
-        <button onclick="copy_to_clipboard()">finish</button>
-        <button onclick="add_dot()">.</button>
-        <button onclick="add_excla()">!</button>
-        <button onclick="add_qm()">?</button>
-        <button onclick="add_heart_emoji()">🥰</button>
-        <button onclick="add_happy_emoji()">😊</button>
-        <button onclick="add_sad_emoji()">😢</button>  
+        <button onclick="move_content()">>>></button>
+      </div>
+      
+      <div class="finished">
+        <textarea placeholder="finish를 누르면 최종답변이 자동 복사됩니다. " id="myInput" cols="50" rows="20" oninput="count_length()"></textarea>
+        <div id="emoji">
+          <button onclick="add_dot()">.</button>
+          <button onclick="add_excla()">!</button>
+          <button onclick="add_qm()">?</button>
+          <button onclick="add_heart_emoji()">🥰</button>
+          <button onclick="add_happy_emoji()">😊</button>
+          <button onclick="add_sad_emoji()">😢</button> 
+        </div>
+        
+        <div class="group2">
+          <div style="font-family:'Courier New', Courier, monospace">count: <input id="count" type="number" name="count" readonly value=0 style="width:50px" ></div>
+          
+          <button onclick="copy_to_clipboard()">finish</button>
+          <button onclick="clear_all()">clear</button>
+        </div>
+        <div class="group2">
+          <div><input type="number" placeholder="상품 id" style="width:100px" id="product_id"><button onclick="go_product_page()" >GO</button></div>
+          
+          
+          <a href="https://www.notion.so/glorang/abd79c6dc320459b805b8cfa801177e3?pvs=4" target="_blank">>> MENUAL</a>
+        
+          
+        </div>
+        
+        
       </div>
       
     </div>
+    
     
   </div>
     
@@ -50,48 +196,143 @@
     <script src="node_modules/handsontable/dist/handsontable.full.min.js"></script> 
     <link href="node_modules/handsontable/dist/handsontable.full.min.css" rel="stylesheet" media="screen">
     <script>
+      var coloridx = 0;
+
+      function move_content(){
+        const selected = hot.getSelected() || []; //location = [row, col, row, col]
+        var data = '';
+        
+        
+        for (let i = 0; i < selected.length; i += 1) {
+          const item = selected[i];
+          data = data + JSON.stringify(hot.getData(...item)['0'][0]).slice(1,-1) + '. ';
+        }
+        var content = document.getElementById('myInput');
+        content.value = content.value + data;
+      }
+
+
+      function count_length(){
+        var colors = ["red", 'red','orange','orange', 'yellow', 'yellow', 'green', 'green', 'blue', 'blue', 'indigo', 'indigo', 'purple', 'purple']
+        var num = document.getElementById("myInput").value.length;
+        var Myelement = document.querySelector('input[name="count"]');
+        Myelement.value = num;
+        Myelement.style.color = colors[coloridx];
+        coloridx += 1; 
+        if (coloridx==14){coloridx = 0;} 
+                
+      }
+      function go_product_page(){
+        var id = document.getElementById("product_id").value; 
+        window.open("https://www.gguge.com/product/" + id);
+        return false;
+        
+      }
+
       function copy_to_clipboard() {    
           var copyText = document.getElementById('myInput');
           console.log(copyText.value);
-          copyText.value = "안녕하세요, 꾸그입니다." + copyText.value + "감사합니다.\n꾸그 드림";
+          copyText.value = "안녕하세요, 꾸그입니다. " + copyText.value + "감사합니다.\n꾸그 드림";
           copyText.select();
           copyText.setSelectionRange(0, 99999);
-          
+          var Myelement = document.querySelector('input[name="count"]');
+          Myelement.value = Number(Myelement.value) + 27;
           document.execCommand("Copy");
       }
 
       function clear_all(){
         var Text = document.getElementById('myInput'); 
         Text.value = null;  
+        var Myelement = document.querySelector('input[name="count"]');
+        Myelement.value = 0;
             
       }
 
       function add_dot(){
         var Text = document.getElementById('myInput'); 
-        Text.value = Text.value + '.';
+        Text.value = Text.value + '. ';
       }
 
       function add_excla(){
         var Text = document.getElementById('myInput'); 
-        Text.value = Text.value + '!';
+        Text.value = Text.value + '! ';
       }
       function add_qm(){
         var Text = document.getElementById('myInput'); 
-        Text.value = Text.value + '?';
+        Text.value = Text.value + '? ';
       }
 
       function add_heart_emoji(){
         var Text = document.getElementById('myInput'); 
-        Text.value = Text.value + '🥰';
+        Text.value = Text.value + '🥰 ';
       }
       function add_happy_emoji(){
         var Text = document.getElementById('myInput'); 
-        Text.value = Text.value + '😊';
+        Text.value = Text.value + '😊 ';
       }
       function add_sad_emoji(){
         var Text = document.getElementById('myInput'); 
-        Text.value = Text.value + '😢';
+        Text.value = Text.value + '😢 ';
       }
+      function get_random_content(){
+        console.log(data.length);
+      }
+
+
+      var debounceFn = Handsontable.helper.debounce(function (colIndex, event) {
+        var filtersPlugin = hot.getPlugin('filters');
+        
+
+        filtersPlugin.removeConditions(colIndex);
+        
+        filtersPlugin.addCondition(colIndex, 'contains', [event.target.value]);
+        filtersPlugin.filter();
+      }, 200);
+
+      var addEventListeners = function (input, colIndex) {
+        input.addEventListener('keydown', function(event) {
+          debounceFn(colIndex, event);
+        });
+      };
+
+ 
+      
+      // Build elements which will be displayed in header.
+      var getInitializedElements = function(colIndex) {
+        var div = document.createElement('div');
+        var input = document.createElement('input');
+
+        div.className = 'filterHeader';
+
+        addEventListeners(input, colIndex);
+
+        div.appendChild(input);
+
+        return div;
+      };
+
+      // Add elements to header on `afterGetColHeader` hook.
+      var addInput = function(col, TH) {
+        // Hooks can return value other than number (for example `columnSorting` plugin use this).
+        if (typeof col !== 'number') {
+          return col;
+        }
+
+        if (col >= 0 && TH.childElementCount < 2) {
+          TH.appendChild(getInitializedElements(col));
+        }
+      };
+
+      // Deselect column after click on input.
+      var doNotSelectColumn = function (event, coords) {
+        console.log(event.target.nodeName);
+        if (coords.row === -1 && event.target.nodeName === 'INPUT') {
+          event.stopImmediatePropagation();
+          this.deselectCell();
+        }
+      };
+      
+
 
       var data = [
       [0, 1, 0, '수업자료', '수업 중 교재 활용에 관련하여 다소 아쉬움을 느끼셨군요'] ,
@@ -1503,17 +1744,43 @@
 [1406, 1, 5, '선생님 문의 요청', " 더불어, 수업과 관련하여 선생님과 1:1 소통을 원하시는 경우 '대화 기능'을 통해 문의가 가능하오니 참고 부탁드립니다"] ,
 [1407, 1, 6, '공통 부정', ' 꾸그와 함께해주셔서 감사드리며, 양질의 수업과 편리한 서비스로 다시 찾아뵐 수 있도록 선생님과 꾸그가 더더욱 노력하겠습니다']
 ];
+      
       var container = document.getElementById('comments');
+
       var hot = new Handsontable(container, {
           data: data,
           rowHeaders: true,
           colHeaders: true,
-          filters: true,
+          outsideClickDeselects: false, 
+          selectionMode: 'multiple',
           dropdownMenu: true, 
-          colWidths: [60, 60, 60, 100, 950],
-          wordWrap: false 
+          filters: true,   
+          
+          colWidths: [35, 35, 35, 80, 850],
+          wordWrap: true, 
+          hiddenColumns: {
+            columns: [0],
+            indicators: true
+          },
+          colHeaders: ["idx", "emotion", "phase", "category", "content"],
+          className: 'tableforcss',
+          cell: [
+            {
+              row: 0, 
+              col: 0, 
+              className: 'custom-cell',
+            },
+          ],
+          afterGetColHeader: addInput,
+          beforeOnCellMouseDown: doNotSelectColumn,
+          licenseKey: 'non-commercial-and-evaluation'
           
       });
+
+      
+      
+
+      
     </script>
 
 
